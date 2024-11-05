@@ -142,10 +142,10 @@ jobs:
           cd bgfx
           ls -lash ".build/linux64_gcc/bin"
           ".build/linux64_gcc/bin/geometryc${{ matrix.binsuffix}}" --version
+          ".build/linux64_gcc/bin/shaderc${{ matrix.binsuffix}}" --version
+          ".build/linux64_gcc/bin/texturec${{ matrix.binsuffix}}" --version
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: linux-gcc-${{ matrix.config }}64
           path: bgfx/.build/linux64_gcc/bin
-          ".build/linux64_gcc/bin/shaderc${{ matrix.binsuffix}}" --version
-          ".build/linux64_gcc/bin/texturec${{ matrix.binsuffix}}" --version
