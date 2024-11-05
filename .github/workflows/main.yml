@@ -52,6 +52,11 @@ jobs:
           ".build\${{ matrix.bindir }}\bin\geometryc${{ matrix.config }}.exe" --version
           ".build\${{ matrix.bindir }}\bin\shaderc${{ matrix.config }}.exe" --version
           ".build\${{ matrix.bindir }}\bin\texturec${{ matrix.config }}.exe" --version
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: msvc-${{ matrix.config }}-${{ matrix.platform }}
+          path: bgfx/.build/${{ matrix.bindir }}/bin
   mingw:
     strategy:
       fail-fast: true
@@ -97,6 +102,11 @@ jobs:
           ".build\${{ matrix.bindir }}\bin\geometrycRelease.exe" --version
           ".build\${{ matrix.bindir }}\bin\shadercRelease.exe" --version
           ".build\${{ matrix.bindir }}\bin\texturecRelease.exe" --version
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: mingw-${{ matrix.msystem }}
+          path: bgfx/.build/${{ matrix.bindir }}/bin
   linux:
     strategy:
       fail-fast: true
@@ -132,5 +142,10 @@ jobs:
           cd bgfx
           ls -lash ".build/linux64_gcc/bin"
           ".build/linux64_gcc/bin/geometryc${{ matrix.binsuffix}}" --version
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-gcc-${{ matrix.config }}64
+          path: bgfx/.build/linux64_gcc/bin
           ".build/linux64_gcc/bin/shaderc${{ matrix.binsuffix}}" --version
           ".build/linux64_gcc/bin/texturec${{ matrix.binsuffix}}" --version
